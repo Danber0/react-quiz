@@ -1,6 +1,6 @@
 export const questions = [
   {
-    questionText: 'Какая сталица франции?',
+    questionText: 'Какая столица франции?',
     answerOptions: [
       { answerText: 'Нью-йорк', isCorrect: false },
       { answerText: 'Лондон', isCorrect: false },
