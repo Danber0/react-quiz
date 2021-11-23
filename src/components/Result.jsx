@@ -11,7 +11,7 @@ function Result({ questions, score }) {
             Поздравляю! Ты успешно прошел тест и правильно ответили на{' '}
             {(score / questions.length) * 100}% вопросов
           </p>
-          <a className="success__link link" href="https:/google.com">
+          <a className="success__link link" href="https://google.com">
             Вот ссылка на оплату курса
           </a>
         </div>
