@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 
 import './App.scss';
+import Result from './components/Result';
+import Quiz from './components/Quiz';
 import { questions } from './heplers/questions';
 
 export default function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
+  const [seconds, setSeconds] = React.useState(20);
   const [score, setScore] = useState(0);
 
+  React.useEffect(() => {
+    if (seconds > 0) {
+      setTimeout(() => setSeconds(seconds - 1), 1000);
+    } else {
+      setSeconds(0);
+    }
+  }, [seconds]);
+
   const handleAnswerOptionClick = (isCorrect) => {
+    const scoreCounter = score + 1;
     if (isCorrect) {
-      setScore(score + 1);
+      setScore(scoreCounter);
     }
 
     const nextQuestion = currentQuestion + 1;
@@ -25,28 +37,15 @@ export default function App() {
     <div className="app">
       <div className="quiz">
         <div className="quiz__menu">
-          {showScore ? (
-            <div className="score-section">
-              Поздравляю! Ты правильно ответили на {(score / questions.length) * 100} % вопросов
-            </div>
+          {showScore || seconds === 0 ? (
+            <Result questions={questions} score={score} />
           ) : (
-            <>
-              <div className="question-section">
-                <div className="question-count">
-                  <span>Номер вопроса {currentQuestion + 1}</span>/{questions.length}
-                </div>
-                <div className="question-text">{questions[currentQuestion].questionText}</div>
-              </div>
-              <div className="answer-section">
-                {questions[currentQuestion].answerOptions.map((answerOption) => (
-                  <button
-                    className="button-answer"
-                    onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>
-                    {answerOption.answerText}
-                  </button>
-                ))}
-              </div>
-            </>
+            <Quiz
+              questions={questions}
+              currentQuestion={currentQuestion}
+              seconds={seconds}
+              handleAnswerOptionClick={handleAnswerOptionClick}
+            />
           )}
         </div>
       </div>

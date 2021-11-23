@@ -29,6 +29,12 @@
   box-sizing: border-box;
 }
 
+.time {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+}
+
 .question-count::before {
   content: '';
   position: absolute;
@@ -70,8 +76,23 @@
 
 .score-section {
   font-size: 35px;
-  width: 800px;
-  height: 400px;
   margin-top: 170px;
   text-align: center;
+}
+
+.wrong,
+.success {
+  line-height: 50px;
+}
+.wrong__link {
+  color: crimson;
+}
+
+.link {
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.success__link {
+  color: chartreuse;
 }
